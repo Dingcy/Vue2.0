@@ -2,6 +2,9 @@ import Vue from 'vue';
 import App from './App.vue';
 import VueRouter from 'vue-router';
 import Home from './components/home/Home.vue';
+import Vip from './components/vip/vip.vue';
+import Search from './components/search/search.vue';
+import ShopCart from './components/shopcart/shopcart.vue';
 import Axios from 'axios';
 
 // mint-ui
@@ -18,10 +21,27 @@ Vue.use(MintUi);
 Vue.use(VueRouter);
 let router = new VueRouter({
     routes: [{
-        name: 'home',
-        path: '/home',
-        component: Home
-    }]
+            name: 'home',
+            path: '/home',
+            component: Home
+        },
+        {
+            name: 'vip',
+            path: '/vip',
+            component: Vip
+        },
+        {
+            name: 'shopcart',
+            path: '/shopcart',
+            component: ShopCart
+        },
+        {
+            name: 'search',
+            path: '/search',
+            component: Search
+        }
+
+    ]
 })
 
 // 服务器请求Axiso设置
