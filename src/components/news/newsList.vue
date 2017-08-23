@@ -4,7 +4,7 @@
         <ul class="mui-table-view">
             <li v-for="news in newsList" :key="news.id" class="mui-table-view-cell mui-media">
                <router-link :to="{name:'newsdetail',query:{'id':news.id}}">
-                    <img class="mui-media-object mui-pull-left" :src="news.img_url">
+                    <img v-lazy="news.img_url" class="mui-media-object mui-pull-left">
                     <div class="mui-media-body">
                         <span v-text="news.title"></span>
                         <div class="news-desc">
@@ -48,4 +48,9 @@ export default {
     float: right;
 }
 
+image[lazy=loading] {
+  width: 40px;
+  height: 100px;
+  margin: auto;
+}
 </style>

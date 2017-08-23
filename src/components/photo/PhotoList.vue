@@ -12,7 +12,7 @@
             <ul>
                 <li v-for="img in imgsList">
                     <router-link :to='{name:"photodetail",query:{id:img.id}}'>
-                        <img :src="img.img_url">
+                        <img v-lazy="img.img_url">
                         <p>
                             <span>{{img.title}}</span>
                             <br>
@@ -111,5 +111,11 @@ export default {
 .photo-list p span:nth-child(1) {
     font-weight: bold;
     font-size: 16px;
+}
+
+image[lazy=loading] {
+  width: 40px;
+  height: 300px;
+  margin: auto;
 }
 </style>

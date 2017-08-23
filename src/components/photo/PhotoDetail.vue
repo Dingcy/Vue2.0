@@ -16,6 +16,9 @@
         <div class="photo-desc">
             <p v-html="infor.content"></p>
         </div>
+
+        <!-- 评论区 -->
+        <comment></comment>
     </div>
 </template>
 <script>

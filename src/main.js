@@ -10,9 +10,12 @@ import NewsDetail from './components/news/newsDetail.vue';
 import PhotoList from './components/photo/PhotoList.vue';
 import PhotoDetail from './components/photo/PhotoDetail.vue';
 import Header from './components/common/header.vue';
+import Comment from './components/common/comment.vue';
 import Moment from 'moment';
 import Axios from 'axios';
 
+// 引入全局css
+// import './static/css/global.css'
 // mint-ui
 import MintUi from 'mint-ui';
 import 'mint-ui/lib/style.css';
@@ -27,6 +30,7 @@ Vue.use(MintUi);
 
 //设置公共模块
 Vue.component('Header', Header);
+Vue.component('Comment', Comment);
 
 // 设置全局过滤器
 Vue.filter('DateFilter', value => {
@@ -35,6 +39,8 @@ Vue.filter('DateFilter', value => {
     // 路由设置
 Vue.use(VueRouter);
 let router = new VueRouter({
+    //更改默认router-link匹配锚点值后加上的class名，默认值router-link-active  
+    linkActiveClass: 'mui-active',
     routes: [{
             path: '/',
             redirect: {
@@ -87,7 +93,18 @@ let router = new VueRouter({
 Axios.defaults.baseURL = 'http://182.254.146.100:8899/api/';
 Vue.prototype.$ajax = Axios;
 
-
+// 设置拦截器，加载loading
+Axios.interceptors.request.use(function(config) {
+    MintUi.Indicator.open({
+        text: '加载中...',
+        spinnerType: 'fading-circle'
+    });
+    return config;
+});
+Axios.interceptors.response.use(function(response) {
+    MintUi.Indicator.close();
+    return response;
+});
 
 new Vue({
     el: "#app",
