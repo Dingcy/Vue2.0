@@ -7,6 +7,8 @@ import Search from './components/search/search.vue';
 import ShopCart from './components/shopcart/shopcart.vue';
 import NewsList from './components/news/newsList.vue';
 import NewsDetail from './components/news/newsDetail.vue';
+import PhotoList from './components/photo/PhotoList.vue';
+import PhotoDetail from './components/photo/PhotoDetail.vue';
 import Header from './components/common/header.vue';
 import Moment from 'moment';
 import Axios from 'axios';
@@ -16,6 +18,9 @@ import MintUi from 'mint-ui';
 import 'mint-ui/lib/style.css';
 // mui
 import Mui from './static/libs/mui-master/dist/css/mui.css';
+// vue-preview
+import VuePreview from 'vue-preview';
+Vue.use(VuePreview);
 
 // mintui创建
 Vue.use(MintUi);
@@ -25,7 +30,7 @@ Vue.component('Header', Header);
 
 // 设置全局过滤器
 Vue.filter('DateFilter', value => {
-        return Moment(value).format('YYYY年MM月DD HH:mm:SS');
+        return Moment(value).format('YYYY-MM-DD');
     })
     // 路由设置
 Vue.use(VueRouter);
@@ -64,6 +69,15 @@ let router = new VueRouter({
             path: '/news/detail',
             component: NewsDetail
 
+        }, {
+            name: 'photolist',
+            path: '/images/list',
+            component: PhotoList
+        },
+        {
+            name: 'photodetail',
+            path: '/images/info',
+            component: PhotoDetail
         }
 
     ]

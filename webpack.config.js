@@ -5,51 +5,50 @@ const htmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
 
     //入口
-    entry:{
-        main:'./src/main.js'
+    entry: {
+        main: './src/main.js'
     },
-    output:{
+    output: {
         //资源产出路径
-        path:path.join(__dirname,'dist'),
-        filename:'build.js'
+        path: path.join(__dirname, 'dist'),
+        filename: 'build.js'
     },
-    module:{
-        loaders:[
-            { //处理css
-                test:/\.css$/,
-                loader:'style-loader!css-loader!autoprefixer-loader'
+    module: {
+        loaders: [{ //处理css
+                test: /\.css$/,
+                loader: 'style-loader!css-loader!autoprefixer-loader'
             },
             {
-                test:/\.less$/,
-                loader:'style-loader!css-loader!autoprefixer-loader!less-loader'
+                test: /\.less$/,
+                loader: 'style-loader!css-loader!autoprefixer-loader!less-loader'
             },
             {
                 //处理文件
-                test:/\.(jpg|png|svg|ttf)$/,
-                loader:'url-loader',
-                options:{
-                    limit:4096
+                test: /\.(jpg|png|svg|ttf|gif)$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 4096
                 }
             },
             //处理js
             {
-                test:/\.js$/,
-                loader:'babel-loader',
+                test: /\.js$/,
+                loader: 'babel-loader',
                 //排除node_modules目录
-                exclude:/node_modules/,
+                exclude: /node_modules/,
                 //options就交给.babelrc文件来说明
             },
             //vue
             {
-                test:/\.vue$/,
-                loader:'vue-loader'
+                test: /\.vue$/,
+                loader: 'vue-loader'
             }
 
         ]
     },
-    plugins:[
+    plugins: [
         new htmlWebpackPlugin({
-            template:'./src/index.html'
+            template: './src/index.html'
         })
     ]
 
