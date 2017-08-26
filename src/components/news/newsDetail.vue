@@ -1,6 +1,6 @@
 <template>
     <div class="tmpl">
-        <Header title="新闻详情"></Header>
+        <Header :title="title"></Header>
         <div class="news-title">
             <p>{{newsdetail.title}}</p>
             <div>
@@ -17,7 +17,8 @@ export default {
     data() {
         return {
             id: '',
-            newsdetail: {}
+            newsdetail: {},
+            title: '新闻详情'
         }
     },
     created() {
@@ -27,6 +28,16 @@ export default {
                 this.newsdetail = res.data.message[0];
             }
         )
+    },
+    beforeRouteEnter(to, from, next) {
+        let title = '';
+        if(to.name.startsWith('goods')){
+            title = "商品详情";
+        }
+        next(vm => {
+            // 通过 `vm` 访问组件实例
+            vm.title = title;
+        })
     }
 }
 </script>
@@ -45,6 +56,8 @@ export default {
     margin-top: 5px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
+
+
 
 
 

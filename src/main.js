@@ -11,6 +11,10 @@ import PhotoList from './components/photo/PhotoList.vue';
 import PhotoDetail from './components/photo/PhotoDetail.vue';
 import Header from './components/common/header.vue';
 import Comment from './components/common/comment.vue';
+import GoodsList from './components/goods/goodslist.vue';
+import GoodsDetail from './components/goods/goodsdetail.vue';
+import LunBo from './components/common/lunbo.vue';
+import GoodsComment from './components/goods/goodscomment.vue';
 import Moment from 'moment';
 import Axios from 'axios';
 
@@ -31,6 +35,8 @@ Vue.use(MintUi);
 //设置公共模块
 Vue.component('Header', Header);
 Vue.component('Comment', Comment);
+Vue.component('LunBo', LunBo);
+
 
 // 设置全局过滤器
 Vue.filter('DateFilter', value => {
@@ -84,6 +90,25 @@ let router = new VueRouter({
             name: 'photodetail',
             path: '/images/info',
             component: PhotoDetail
+        },
+        {
+            name: 'goodslist',
+            path: '/goods/list',
+            component: GoodsList
+        },
+        {
+            name: 'goodsDetail',
+            path: '/goods/detail',
+            component: GoodsDetail
+        },
+        {
+            name: 'goodsphotoDetail',
+            path: '/goods/info',
+            component: NewsDetail
+        }, {
+            name: 'goodscomment',
+            path: '/goods/comment',
+            component: GoodsComment
         }
 
     ]

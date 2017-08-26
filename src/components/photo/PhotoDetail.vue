@@ -9,7 +9,7 @@
         </div>
         <ul class="mui-table-view mui-grid-view mui-grid-9">
             <li v-for="(item,index) in imginfor" class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-                <!-- <img :src="item.src"> -->
+            
                  <img class="preview-img" :src="item.src" height="100" @click="$preview.open(index, imginfor)">
             </li>
         </ul>
@@ -45,7 +45,7 @@ export default {
                 });
             })
             ).catch(err => {
-                Console.log(err);
+                console.log(err);
             })
     }
 }

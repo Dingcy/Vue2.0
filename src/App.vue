@@ -1,7 +1,9 @@
 <template>
     <div>
         <mt-header title="My Vue Project"></mt-header>
-        <router-view></router-view>
+        <transition name="MyFade" mode="out-in">
+            <router-view></router-view>
+        </transition>
         <nav class="mui-bar mui-bar-tab">
             <router-link :to="{name:'home'}" class="mui-tab-item " >
                 <span class="mui-icon icon-shouye"></span>
@@ -14,7 +16,7 @@
             </router-link>
             <router-link :to="{name:'shopcart'}" class="mui-tab-item" >
                 <span class="mui-icon icon-gouwucheman">
-                     <span class="mui-badge">9</span>
+                     <span class="mui-badge">{{goodsNum}}</span>
                 </span>
                 <span class="mui-tab-label">购物车</span>
             </router-link>
@@ -28,12 +30,18 @@
 </template>
 
 <script>
+import Connector from './components/common/connector.js';
 export default {
     data() {
         return {
-
+            goodsNum:0,
         }
-    }
+    },
+   created(){
+       Connector.$on('shop-cart',(num)=>{
+           this.goodsNum +=num;
+       })
+   },
 }
 </script>
 
@@ -44,5 +52,13 @@ export default {
 
 .tmpl {
     margin-bottom: 50px;
+}
+
+.MyFade-enter-active,.MyFade-leave-active{
+    transition: all 0.3s ;
+}
+
+.MyFade-enter,.MyFade-leave-to{
+    opacity: 0;
 }
 </style>
