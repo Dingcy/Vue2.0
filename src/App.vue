@@ -40,6 +40,9 @@ export default {
    created(){
        Connector.$on('shop-cart',(num)=>{
            this.goodsNum +=num;
+       });
+       Connector.$on('shop-cart2',(num)=>{
+           this.goodsNum = num;
        })
    },
 }

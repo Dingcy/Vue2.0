@@ -58,7 +58,7 @@ export default {
         return {
             goodsInfor: {},
             goodsNum: 1,
-            isShow:false,
+            isShow: false,
         }
     },
     methods: {
@@ -74,27 +74,53 @@ export default {
             }
             this.goodsNum++;
         },
-        pushShopcart(){
+        pushShopcart() {
             this.isShow = true;
-            Connector.$emit('shop-cart',this.goodsNum);
+            Connector.$emit('shop-cart', this.goodsNum);
+
+            if (window.localStorage.getItem('shopcart')) {
+                let shopcartinfor = JSON.parse(window.localStorage.getItem('shopcart'));
+                for(let i= 0;i<shopcartinfor.length;i++){
+                    if (shopcartinfor[i].id === this.$route.query.goodsId) {
+                        shopcartinfor[i].num += this.goodsNum;
+                        window.localStorage.setItem("shopcart",
+                            JSON.stringify(shopcartinfor));
+                            return false;
+                    }
+                }
+                shopcartinfor.push({
+                    id: this.$route.query.goodsId,
+                    num: this.goodsNum
+                });
+                window.localStorage.setItem("shopcart",
+                    JSON.stringify(shopcartinfor));
+            } else {
+                let shopcartinfor = [];
+                shopcartinfor.push({
+                    id: this.$route.query.goodsId,
+                    num: this.goodsNum
+                });
+                window.localStorage.setItem("shopcart",
+                    JSON.stringify(shopcartinfor))
+            };
         },
-        afterEnter:function(el){
+        afterEnter: function(el) {
             this.isShow = false;
         },
-        photoInfor(){
+        photoInfor() {
             this.$router.push({
-                name:'goodsphotoDetail',
-                query:{
-                    id:this.goodsInfor.id
-                    }
+                name: 'goodsphotoDetail',
+                query: {
+                    id: this.goodsInfor.id
+                }
             })
         },
-        goodsComment(){
+        goodsComment() {
             this.$router.push({
-                name:'goodscomment',
-                query:{
-                    id:this.goodsInfor.id
-                    }
+                name: 'goodscomment',
+                query: {
+                    id: this.goodsInfor.id
+                }
             })
         }
     },
@@ -149,6 +175,9 @@ export default {
 
 
 
+
+
+
 /*请ulpadding*/
 
 .outer-swiper ul,
@@ -194,6 +223,9 @@ export default {
 
 
 
+
+
+
 /*加减*/
 
 .number-li span {
@@ -201,6 +233,9 @@ export default {
     border: 2px solid rgba(0, 0, 0, 0.1);
     width: 25px;
 }
+
+
+
 
 
 
